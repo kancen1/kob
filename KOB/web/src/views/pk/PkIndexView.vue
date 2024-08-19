@@ -53,9 +53,9 @@ export default {
             photo: data.opponent_photo,
           });
           setTimeout(() => {
-            // 匹配成功后跳转到游戏页面延迟2秒
+            // 匹配成功后跳转到游戏页面延迟1秒
             store.commit("updateStatus", "playing");
-          }, 200); // 不知道为什么不能加0
+          }, 1000); // game.start要sleep几秒钟不然会吞代码
           // 接受信息后更新地图
           store.commit("updateGame", data.game);
         } else if (data.event === "move") {

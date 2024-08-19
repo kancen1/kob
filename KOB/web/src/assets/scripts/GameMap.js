@@ -131,7 +131,7 @@
                 else if (e.key === 'a' || e.key === 'A') d = 3;
 
                 if (d >= 0) {
-                    this.store.state.pk.socket.send(JSON.stringify({ // 发送给后端
+                    this.store.state.pk.socket.send(JSON.stringify({ // 前端向后端发送信息
                         event: "move",
                         direction: d, // 0123 上下左右
                     }))

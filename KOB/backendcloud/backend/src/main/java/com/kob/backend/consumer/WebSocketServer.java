@@ -137,7 +137,12 @@ public class WebSocketServer {
             users.get(b.getId()).game = game;
         }
 
-        // 另起一个线程
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        // 另起一个线程 之前要sleep几秒钟等待前端不然会报错
         game.start();
 
 

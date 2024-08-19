@@ -10,10 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
+// 指示Spring自动检测并注册一个Bean
 @Component
 public class MatchingPool extends Thread { // 多线程类
     private static List<Player> players = new ArrayList<>();
-    private ReentrantLock lock = new ReentrantLock();
+    private final ReentrantLock lock = new ReentrantLock();
 
     private static RestTemplate restTemplate;
 
@@ -24,10 +25,10 @@ public class MatchingPool extends Thread { // 多线程类
         MatchingPool.restTemplate = restTemplate;
     }
 
-    public void addPlayer(Integer userId, Integer rating) {
+    public void addPlayer(Integer userId, Integer rating, Integer botId) {
         lock.lock();
         try {
-            players.add(new Player(userId, rating, 0));
+            players.add(new Player(userId, rating, botId, 0));
         } finally {
             lock.unlock();
         }
@@ -54,7 +55,7 @@ public class MatchingPool extends Thread { // 多线程类
         }
     }
 
-    private boolean checkMatched(Player a, Player b) { // 判断两名玩家是否匹配
+    private boolean checkMatched(Player a, Player b) { // 判断两名玩家是否满足匹配要求
         int ratingDelta = Math.abs(a.getRating() - b.getRating()); // 计算两名玩家的rating差值
         int waitingTime = Math.min(a.getWaitingTime(), b.getWaitingTime()); // 取两名玩家等待时间的最小值
         return ratingDelta <= waitingTime * 10; // 如果rating差值小于等于等待时间*10，则认为两名玩家匹配
@@ -64,7 +65,9 @@ public class MatchingPool extends Thread { // 多线程类
         System.out.println("send result" + a + " " + b);
         MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
         data.add("a_id", a.getUserId().toString());
+        data.add("a_bot_id", a.getBotId().toString());
         data.add("b_id", b.getUserId().toString());
+        data.add("b_bot_id", b.getBotId().toString());
         restTemplate.postForObject(startGameUrl, data, String.class);
     }
 

@@ -13,6 +13,8 @@ import java.util.List;
 // 用来维护玩家信息
 public class Player {
     private Integer id;
+    private Integer botId; // -1表示亲自出马， 否则表示用AI
+    private String botCode;
     // 玩家在棋盘上的位置起点坐标 sx行数 sy列数 同步玩家位置
     private Integer sx;
     private Integer sy;

@@ -18,7 +18,8 @@ public class MatcingController {
     public String addPlayer(@RequestParam MultiValueMap<String, String> data) { // MultiValueMap 一个键可以存储多个值
         Integer userId = Integer.parseInt(Objects.requireNonNull(data.getFirst("user_id"))); // 获取user_id参数
         Integer rating = Integer.parseInt(Objects.requireNonNull(data.getFirst("rating"))); // 获取rating参数
-        return matchingService.addPlayer(userId, rating);
+        Integer botId = Integer.parseInt(Objects.requireNonNull(data.getFirst("bot_id"))); // 获得bot_id
+        return matchingService.addPlayer(userId, rating, botId);
     }
 
     @PostMapping("/player/remove/")

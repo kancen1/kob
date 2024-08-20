@@ -17,6 +17,10 @@ export default {
 
 <style>
 div.content-feild {
-    margin: 20px;
+    margin-top: 20px;
+}
+
+card {
+    border-radius: 8px;
 }
 </style>

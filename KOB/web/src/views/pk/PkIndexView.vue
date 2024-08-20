@@ -23,6 +23,8 @@ export default {
     const socketUrl = `ws://localhost:3000/websocket/${store.state.user.token}/`;
 
     store.commit("updateLoser", "none");
+    store.commit("updateIsRecord", false);
+
 
     let socket = null;
     // 当组件被挂载创建链接

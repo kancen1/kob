@@ -17,7 +17,7 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping("/user/account/token/")
-    // 将POST请求参数拿出来  @PathVariable用来获得url中的信息 {} 如{username}
+    // 将请求参数拿出来  @PathVariable用来获得url中的信息 {} 如{username}
     public Map<String, String> getToken(@RequestParam Map<String, String> map) {
         String username = map.get("username");
         String password = map.get("password");

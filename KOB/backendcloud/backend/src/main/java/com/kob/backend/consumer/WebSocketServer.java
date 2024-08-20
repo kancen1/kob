@@ -42,7 +42,7 @@ public class WebSocketServer {
     private Session session = null;
 
     // 因为不是标准Spring里面的不能直接用@Autowired
-    private static UserMapper userMapper;
+    public static UserMapper userMapper;
     public static RecordMapper recordMapper;
     public static BotMapper botMapper;
 

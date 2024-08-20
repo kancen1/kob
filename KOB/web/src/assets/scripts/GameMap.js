@@ -120,7 +120,31 @@
 
         // 添加一个事件用于读取用户输入
         add_listening_events() {
-            // 聚焦
+            if(this.store.state.record.is_record) {
+                let k = 0; // 记录步数
+                const a_steps = this.store.state.record.a_steps;
+                const b_steps = this.store.state.record.b_steps;
+                const loser = this.store.state.record.record_loser;
+                const [snake0, snake1] = this.snakes;
+                const interval_id = setInterval(() => {
+                    // 设定每多久执行一个函数
+                    if (k >= a_steps.length - 1) {  // 最后一步死亡
+                        if (loser === "all" || loser === "A") {
+                            snake0.status = "die";
+                        }
+            
+                        if (loser === "all" || loser === "B") {
+                        snake1.status = "die";
+                        }
+                        clearInterval(interval_id); // 取消循环
+                    } else {
+                        snake0.set_direction(parseInt(a_steps[k]));
+                        snake1.set_direction(parseInt(b_steps[k]));
+                    }
+                    k ++ ;
+                }, 300);
+            } else { // 如果不是录像的话
+            // 聚焦 
             this.ctx.canvas.focus();
 
             this.ctx.canvas.addEventListener("keydown", e => {
@@ -137,6 +161,7 @@
                     }))
                 }
             });
+            }
         }   
 
         start() {

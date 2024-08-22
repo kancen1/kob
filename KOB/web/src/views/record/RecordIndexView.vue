@@ -13,15 +13,25 @@
 
       <tbody>
         <tr v-for="record in records" :key="record.record.id">
-          <td>
-            <img :src="record.a_photo" alt="" class="record-user-photo" />
-            &nbsp;
-            <span class="record-user-username">{{ record.a_username }}</span>
+          <td class="col-md-2">
+            <div class="row">
+              <div class="col-md-6">
+               <img :src="record.a_photo" alt="" class="record-user-photo" />
+              </div>
+              <div class="col-md-6">
+                <span class="record-user-username">{{ record.a_username }}</span>
+              </div>
+            </div>
           </td>
-          <td>
-            <img :src="record.b_photo" alt="" class="record-user-photo" />
-            &nbsp;
-            <span class="record-user-username">{{ record.b_username }}</span>
+          <td class="col-md-2">
+            <div class="row">
+              <div class="col-md-6">
+                <img :src="record.b_photo" alt="" class="record-user-photo" />
+              </div>
+              <div class="col-md-6">
+                <span class="record-user-username">{{ record.b_username }}</span>
+              </div>
+            </div>
           </td>
           <td>{{ record.result }}</td>
           <td>{{ record.record.createtime }}</td>
@@ -37,24 +47,47 @@
         </tr>
       </tbody>
     </table>
-    <nav aria-label="...">
-      <ul class="pagination" style="float: right">
-        <li class="page-item" @click="click_page(-2)">
-          <a class="page-link" href="#">前一页</a>
-        </li>
-        <li
-          :class="'page-item ' + page.is_active"
-          v-for="page in pages"
-          :key="page.number"
-          @click="click_page(page.number)"
-        >
-          <a class="page-link" href="#">{{ page.number }}</a>
-        </li>
-        <li class="page-item" @click="click_page(-1)">
-          <a class="page-link" href="#">后一页</a>
-        </li>
-      </ul>
-    </nav>
+    <div class="row">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-3">
+            <div class="mb-3">
+              <label for="pege_goto" class="visually-hidden">页码</label>
+              <input
+                type="number"
+                class="form-control"
+                id="pege_goto"
+                placeholder="请输入页码"
+                v-model="cnt"
+              />
+            </div>
+          </div>
+          <div class="col-2">
+            <button class="btn btn-primary mb-3" @click="jump_page()">跳转</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <nav aria-label="..." class="float-end">
+          <ul class="pagination">
+            <li class="page-item" @click="click_page(-2)">
+              <a class="page-link" href="#">前一页</a>
+            </li>
+            <li
+              :class="'page-item ' + page.is_active"
+              v-for="page in pages"
+              :key="page.number"
+              @click="click_page(page.number)"
+            >
+              <a class="page-link" href="#">{{ page.number }}</a>
+            </li>
+            <li class="page-item" @click="click_page(-1)">
+              <a class="page-link" href="#">后一页</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
   </ContentField>
 </template>
 
@@ -77,6 +110,7 @@ export default {
     let current_page = 1;
     let total_records = 0;
     let pages = ref([]);
+    let cnt = ref('');
 
     const click_page = (page) => {
       if (page === -2) page = current_page - 1;
@@ -87,6 +121,7 @@ export default {
         // 如果合法
         pull_page(page); // 加载一个新分页  可以用此传入页数进行搜索
       }
+      cnt.value = "";
     };
 
     const update_pages = () => {
@@ -175,11 +210,17 @@ export default {
       }
     };
 
+    const jump_page = () => {
+      click_page(parseInt(cnt.value));
+    };
+
     return {
       records,
       open_record_content,
       pages,
+      cnt,
       click_page,
+      jump_page,
     };
   },
 };
@@ -188,6 +229,20 @@ export default {
 <style scoped>
 img.record-user-photo {
   width: 4vh;
-  border-radius: 50%;
+  border-radius: 5px;
+  float: right;
+}
+
+.table {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
+tbody > tr {
+  height: 8vh;
+}
+
+.record-user-username {
+  float: left;
 }
 </style>

@@ -1,9 +1,9 @@
 <template>
-    <!-- 这样就产生关联了 -->
-  <div ref="parent" class="gamemap">
-    <!-- 加上聚焦以便于读取用户操作 -->
-    <canvas ref="canvas" tabindex="0"></canvas>
-  </div>
+        <!-- 这样就产生关联了 -->
+    <div ref="parent" class="gamemap">
+        <!-- 加上聚焦以便于读取用户操作 -->
+        <canvas ref="canvas" tabindex="0"></canvas>
+    </div>
 </template>
 
 <script>

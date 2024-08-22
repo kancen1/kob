@@ -1,5 +1,6 @@
 import store from '@/store'
 import NotFound from '@/views/error/NotFound.vue'
+import GameInfoIndexView from '@/views/gameinfo/GameInfoIndexView.vue'
 import PkIndexView from '@/views/pk/PkIndexView.vue'
 import RanklistIndexView from '@/views/ranklist/RanklistIndexView.vue'
 import RecordContentView from '@/views/record/RecordContentView.vue'
@@ -73,6 +74,14 @@ const routes = [
     path: '/user/account/register/',
     name: 'user_account_register',
     component: UserAccountRegisterView,
+    meta: {
+      requestAuth: false,
+    }
+  },
+  {
+    path: '/game/info/',
+    name: 'game_info_index',
+    component: GameInfoIndexView,
     meta: {
       requestAuth: false,
     }

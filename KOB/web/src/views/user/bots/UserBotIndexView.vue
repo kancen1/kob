@@ -43,15 +43,26 @@
                     <br />
                     &nbsp; package com.kob.botrunningsystem.utils;
                     <br />
+                    &nbsp; import java.io.File;
+                    <br />
+                    &nbsp; import java.io.FileNotFoundException;
+                    <br />
                     &nbsp; import java.util.ArrayList;
                     <br />
                     &nbsp; import java.util.List;
                     <br />
+                    &nbsp; import java.util.Scanner;
+                    <br />
                     <b>具体操作请看示例(本例实现简单的判断下一步是否有蛇以及障碍)</b>
                     <pre>
                       package com.kob.botrunningsystem.utils;
+
+                      import java.io.File;
+                      import java.io.FileNotFoundException;
                       import java.util.ArrayList;
                       import java.util.List;
+                      import java.util.Scanner;
+
 
                       public class Bot implements com.kob.botrunningsystem.utils.BotInterface{
                           static class Cell {
@@ -90,7 +101,6 @@
                               return res;
                           }
 
-                          @Override
                           public Integer nextMove(String input) {
                               // 地图（障碍物用0 1表示） #隔开 自己的横坐标me.sx #隔开 # 自己的横坐标me.sy #( 我的操作 )# 对手坐标横坐标you.sx # you.sy #( 对手操作 )
                               String[] strs = input.split("#"); // 解码为
@@ -123,6 +133,17 @@
                                   }
                               }
                               return 0; // 默认向上走
+                          }
+
+                          @Override
+                          public Integer get() {
+                              File file = new File("input.txt");
+                              try {
+                                  Scanner sc = new Scanner(file);
+                                  return nextMove(sc.next());
+                              } catch (FileNotFoundException e) {
+                                  throw new RuntimeException(e);
+                              }
                           }
                       }
 
@@ -396,7 +417,7 @@ export default {
 
     const refresh_bots = () => {
       $.ajax({
-        url: "http://localhost:3000/user/bot/getlist/",
+        url: "http://localhost:/api/user/bot/getlist/",
         type: "get",
         headers: {
           Authorization: "Bearer " + store.state.user.token,
@@ -413,7 +434,7 @@ export default {
     const add_bot = () => {
       botadd.error_message = "";
       $.ajax({
-        url: "http://localhost:3000/user/bot/add/",
+        url: "http://localhost:3000/api/user/bot/add/",
         type: "post",
         data: {
           title: botadd.title,
@@ -446,7 +467,7 @@ export default {
 
     const remove_bot = (bot) => {
       $.ajax({
-        url: "http://localhost:3000/user/bot/remove/",
+        url: "http://localhost:3000/api/user/bot/remove/",
         type: "post",
         data: {
           bot_id: bot.id,
@@ -465,7 +486,7 @@ export default {
     const update_bot = (bot) => {
       botadd.error_message = "";
       $.ajax({
-        url: "http://localhost:3000/user/bot/update/",
+        url: "http://localhost:3000/api/user/bot/update/",
         type: "post",
         data: {
           bot_id: bot.id,

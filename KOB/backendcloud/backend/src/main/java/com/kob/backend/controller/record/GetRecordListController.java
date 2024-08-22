@@ -15,7 +15,7 @@ public class GetRecordListController {
     @Autowired
     private GetRecordListServiceImpl getRecordListService;
 
-    @GetMapping("/record/getlist/") // 只获取数据 不修改
+    @GetMapping("/api/record/getlist/") // 只获取数据 不修改
     JSONObject getList(@RequestParam Map<String, String> data) {
         Integer page = Integer.parseInt(data.get("page"));
         return getRecordListService.getList(page);

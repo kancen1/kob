@@ -14,7 +14,7 @@ public class AddController {
     private AddService addService;
 
     // 需要修改数据库使用POST
-    @PostMapping("/user/bot/add/")
+    @PostMapping("/api/user/bot/add/")
     public Map<String, String> add(@RequestParam Map<String, String> data){
         return addService.add(data);
     }

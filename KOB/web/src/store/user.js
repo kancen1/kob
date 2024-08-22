@@ -40,7 +40,7 @@ export default {
         login(context, data) {
             // 报错405 方法错误
             $.ajax({
-                url: "http://localhost:3000/user/account/token/",
+                url: "http://localhost:3000/api/user/account/token/",
                 type: "post",
                 data: {
                 username: data.username,
@@ -64,7 +64,7 @@ export default {
 
         getinfo(context, data) {
             $.ajax({
-            url: "http://localhost:3000/user/account/info/",
+            url: "http://localhost:3000/api/user/account/info/",
             type: "get",
             // 不被公开要使用表头授权
             headers: {

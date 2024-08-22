@@ -72,7 +72,6 @@ public class MatchingPool extends Thread { // 多线程类
     }
 
     private void mathPlayers() { // 尝试匹配所有玩家
-        System.out.println("matching players" + players.toString());
         boolean[] used = new boolean[players.size()]; // 创建一个boolean数组，用于标记玩家是否已经匹配
         // 按照等待时间从长到短枚举玩家
         for (int i = 0; i < players.size(); i ++ ) { // 遍历players

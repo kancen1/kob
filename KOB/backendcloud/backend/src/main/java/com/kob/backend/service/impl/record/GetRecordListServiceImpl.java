@@ -37,8 +37,16 @@ public class GetRecordListServiceImpl implements GetRecordListService {
         JSONObject resp = new JSONObject();
         List<JSONObject> items = new LinkedList<>();
         for (Record record: records) {
-            User userA = userMapper.selectById(record.getAId());
-            User userB = userMapper.selectById(record.getBId());
+            User userA;
+            User userB;
+            // 特判如果b玩家是AI则手动添加一个user photo和user
+            if (record.getBId() < -1) {
+                userA = userMapper.selectById(record.getAId());
+                userB = new User(-userA.getId(), "Bot", null, "https://pic.52112.com/180717/JPG-180717_308/u7TAfWgCAM_small.jpg", 1500);
+            } else {
+                userA = userMapper.selectById(record.getAId());
+                userB = userMapper.selectById(record.getBId());
+            }
             JSONObject item = new JSONObject();
             item.put("a_photo", userA.getPhoto());
             item.put("a_username", userA.getUsername());

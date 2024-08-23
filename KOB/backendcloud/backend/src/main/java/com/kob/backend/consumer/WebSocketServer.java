@@ -106,6 +106,7 @@ public class WebSocketServer {
     public void onClose() {
         // 关闭链接 自动触发
         System.out.println("disconnected!");
+        stopMatching(); // 如果关闭链接自动取消匹配
 
         // 删除这个链接
         if (this.user != null) {
@@ -116,7 +117,16 @@ public class WebSocketServer {
 
     public static void startGame(Integer aId, Integer aBotId, Integer bId, Integer bBotId) {
         // 开始游戏
-        User a = userMapper.selectById(aId), b = userMapper.selectById(bId);
+        User a;
+        User b;
+        if (bId == -aId) { // 如果bid为aid的负数 则为AI
+            a = userMapper.selectById(aId);
+            b = new User(-aId, "Bot", null, "https://pic.52112.com/180717/JPG-180717_308/u7TAfWgCAM_small.jpg", 1500);
+        } else {
+            a = userMapper.selectById(aId);
+            b = userMapper.selectById(bId);
+        }
+
         Bot botA = botMapper.selectById(aBotId), botB = botMapper.selectById(bBotId);
 
         Game game = new Game(

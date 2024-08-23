@@ -2,7 +2,7 @@
   <div class="playground">
     <GameMap></GameMap>
   </div>
-  <PkUserInfo></PkUserInfo>
+  <PkUserInfo v-if="$store.state.record.is_record === false"></PkUserInfo>
 </template>
 
 <script>

@@ -73,6 +73,18 @@ public class MatchingPool extends Thread { // 多线程类
 
     private void mathPlayers() { // 尝试匹配所有玩家
         boolean[] used = new boolean[players.size()]; // 创建一个boolean数组，用于标记玩家是否已经匹配
+        //System.out.println(players);
+
+        // 匹配时间超过十五秒添加人机玩家
+        for (int i = 0; i < players.size(); i ++ ) { // 遍历players
+            if (players.get(i).getWaitingTime() >= 15 && players.size() == 1) { // 如果玩家等待时间超过15秒且只有一位玩家
+                used[i] = true; // 将玩家标记为已匹配
+                // 添加人机玩家 （id为负数）
+                sendResult(players.get(i), new Player(-(players.get(i).getUserId()), 1500, -2, 0)); // 发送匹配结果
+                break; // 跳出循环
+            }
+        }
+
         // 按照等待时间从长到短枚举玩家
         for (int i = 0; i < players.size(); i ++ ) { // 遍历players
             if (used[i]) continue; // 如果玩家已经匹配，跳过
@@ -89,7 +101,7 @@ public class MatchingPool extends Thread { // 多线程类
 
         List<Player> newPlayers = new ArrayList<>();
         for (int i = 0; i < players.size(); i ++ ) { // 遍历players
-            if (!used[i]) { // 如果玩家没有匹配
+            if (!used[i] && players.get(i).getWaitingTime() <= 60) { // 如果玩家没有匹配且匹配时长小于60秒
                 newPlayers.add(players.get(i)); // 将玩家添加到newPlayers中
             }
         }

@@ -313,20 +313,35 @@ public class Game extends Thread {
     }
 
     private void saveToDatabase() { // 存储对局
-        Integer ratingA = WebSocketServer.userMapper.selectById(playerA.getId()).getRating();
-        Integer ratingB = WebSocketServer.userMapper.selectById(playerB.getId()).getRating();
-
-        if ("A".equals(loser)) {
-            ratingA -= 2;
-            ratingB += 5;
-        } else if ("B".equals(loser)) {
-            ratingA += 5;
-            ratingB -= 2;
+        Integer ratingA;
+        Integer ratingB = 0;
+        if (playerB.getId() < -1) {
+            // 如果是人机则只存储A的
+            ratingA = WebSocketServer.userMapper.selectById(playerA.getId()).getRating();
+            if ("A".equals(loser)) {
+                ratingA -= 2;
+            } else if ("B".equals(loser)) {
+                ratingA += 5;
+            }
+        } else {
+            ratingA = WebSocketServer.userMapper.selectById(playerA.getId()).getRating();
+            ratingB = WebSocketServer.userMapper.selectById(playerB.getId()).getRating();
+            if ("A".equals(loser)) {
+                ratingA -= 2;
+                ratingB += 5;
+            } else if ("B".equals(loser)) {
+                ratingA += 5;
+                ratingB -= 2;
+            }
         }
 
-        updateUserRating(playerA, ratingA);
-        updateUserRating(playerB, ratingB);
-
+        if (playerB.getId() < -1) {
+            updateUserRating(playerA, ratingA);
+        } else {
+            updateUserRating(playerA, ratingA);
+            updateUserRating(playerB, ratingB);
+        }
+        
         Record record = new Record(
                 null,
                 playerA.getId(),

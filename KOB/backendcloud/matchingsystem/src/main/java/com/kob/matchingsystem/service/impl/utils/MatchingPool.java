@@ -77,7 +77,7 @@ public class MatchingPool extends Thread { // 多线程类
 
         // 匹配时间超过十五秒添加人机玩家
         for (int i = 0; i < players.size(); i ++ ) { // 遍历players
-            if (players.get(i).getWaitingTime() >= 15 && players.size() == 1) { // 如果玩家等待时间超过15秒且只有一位玩家
+            if (players.get(i).getWaitingTime() >= 10 && players.size() == 1) { // 如果玩家等待时间超过10秒且只有一位玩家
                 used[i] = true; // 将玩家标记为已匹配
                 // 添加人机玩家 （id为负数）
                 sendResult(players.get(i), new Player(-(players.get(i).getUserId()), 1500, -2, 0)); // 发送匹配结果

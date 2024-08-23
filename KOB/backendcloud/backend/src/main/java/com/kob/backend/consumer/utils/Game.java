@@ -316,7 +316,6 @@ public class Game extends Thread {
         Integer ratingA;
         Integer ratingB = 0;
         if (playerB.getId() < -1) {
-            System.out.println("test");
             // 如果是人机则只存储A的
             ratingA = WebSocketServer.userMapper.selectById(playerA.getId()).getRating();
             if ("A".equals(loser)) {

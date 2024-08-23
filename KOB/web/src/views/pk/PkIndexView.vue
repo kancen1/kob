@@ -57,7 +57,7 @@ export default {
           setTimeout(() => {
             // 匹配成功后跳转到游戏页面延迟1秒
             store.commit("updateStatus", "playing");
-          }, 500); // game.start要sleep几秒钟不然会吞代码
+          }, 300); // game.start要sleep几秒钟不然会吞代码
           // 接受信息后更新地图
           store.commit("updateGame", data.game);
         } else if (data.event === "move") {

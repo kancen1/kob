@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication  // spring入口
-public class    MatchingSystemApplication {
+public class MatchingSystemApplication {
     public static void main(String[] args) {
         MatchingServiceImpl.matchingPool.start(); // 启动线程
         SpringApplication.run(MatchingSystemApplication.class, args); // 启动springboot

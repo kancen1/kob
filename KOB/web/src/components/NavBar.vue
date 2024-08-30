@@ -114,6 +114,13 @@ export default {
       logout,
     };
   },
+
+  mounted() {
+    const script = document.createElement("script");
+    script.src ="https://api.vvhan.com/api/script/yinghua";
+    script.async = true;
+    document.body.appendChild(script);
+  }
 };
 </script>
 

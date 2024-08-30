@@ -46,7 +46,7 @@ export default {
         const register = () => {
             error_message.value = "";
             $.ajax({
-                url: "http://localhost:3000/api/user/account/register/",
+                url: "https://kancen.fun/api/user/account/register/",
                 type: 'post',
                 data: {
                     username: username.value,

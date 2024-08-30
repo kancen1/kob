@@ -16,28 +16,49 @@
           <div class="card-header" style="box-sizing: border-box">
             <span style="font-size: 130%; line-height: 37.6px">我的Bot</span>
 
-            <button type="button" class="btn btn-warning code_considerations" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button
+              type="button"
+              class="btn btn-warning code_considerations"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
               编写bot注意事项
             </button>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div
+              class="modal fade"
+              id="exampleModal"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
               <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">编写bot注意事项</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                      编写bot注意事项
+                    </h1>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
                   </div>
                   <div class="modal-body">
                     请注意，编写bot时需要遵守以下规则：
                     <br />
-                    1. 目前暂时只允许使用java语言编写bot，且每个用户的bot数量不得多余十个。
+                    1.
+                    目前暂时只允许使用java语言编写bot，且每个用户的bot数量不得多余十个。
                     <br />
                     2. 目前bot代码编写要遵循以下规则
                     <br />
                     &nbsp; 0,1,2,3 分别对应蛇的上右下左操作
                     <br />
-                    &nbsp; 地图（障碍物用0 1表示） #隔开 自己的横坐标me.sx #隔开 # 自己的纵坐标me.sy #( 我的操作 )# 对手坐标 横坐标you.sx # 纵坐标you.sy #( 对手操作)
+                    &nbsp; 地图（障碍物用0 1表示） #隔开 自己的横坐标me.sx #隔开
+                    # 自己的纵坐标me.sy #( 我的操作 )# 对手坐标 横坐标you.sx #
+                    纵坐标you.sy #( 对手操作)
                     <br />
                     &nbsp; 需要导包:
                     <br />
@@ -53,7 +74,9 @@
                     <br />
                     &nbsp; import java.util.Scanner;
                     <br />
-                    <b>具体操作请看示例(本例实现简单的判断下一步是否有蛇以及障碍)</b>
+                    <b
+                      >具体操作请看示例(本例实现简单的判断下一步是否有蛇以及障碍)</b
+                    >
                     <pre>
                       package com.kob.botrunningsystem.utils;
 
@@ -150,7 +173,13 @@
                     </pre>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">了解了</button>
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      了解了
+                    </button>
                   </div>
                 </div>
               </div>
@@ -417,7 +446,7 @@ export default {
 
     const refresh_bots = () => {
       $.ajax({
-        url: "http://localhost:3000/api/user/bot/getlist/",
+        url: "https://kancen.fun/api/user/bot/getlist/",
         type: "get",
         headers: {
           Authorization: "Bearer " + store.state.user.token,
@@ -434,7 +463,7 @@ export default {
     const add_bot = () => {
       botadd.error_message = "";
       $.ajax({
-        url: "http://localhost:3000/api/user/bot/add/",
+        url: "https://kancen.fun/api/user/bot/add/",
         type: "post",
         data: {
           title: botadd.title,
@@ -467,7 +496,7 @@ export default {
 
     const remove_bot = (bot) => {
       $.ajax({
-        url: "http://localhost:3000/api/user/bot/remove/",
+        url: "https://kancen.fun/api/user/bot/remove/",
         type: "post",
         data: {
           bot_id: bot.id,
@@ -486,7 +515,7 @@ export default {
     const update_bot = (bot) => {
       botadd.error_message = "";
       $.ajax({
-        url: "http://localhost:3000/api/user/bot/update/",
+        url: "https://kancen.fun/api/user/bot/update/",
         type: "post",
         data: {
           bot_id: bot.id,
@@ -556,6 +585,4 @@ div.error-message {
 .code_considerations {
   margin-left: 20px;
 }
-
-
 </style>

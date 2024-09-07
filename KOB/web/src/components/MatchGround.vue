@@ -33,7 +33,12 @@
         </div>
       </div>
     </div>
-    <div class="col-12" style="text-align: center; padding-top: 15vh">
+
+    <div class="col-12 match-time" v-if="match_time !== 0">
+      {{ match_time }}
+    </div>
+
+    <div class="col-12" style="text-align: center; padding-top: 13vh">
       <button
         @click="click_match_btn"
         type="button"
@@ -57,6 +62,14 @@ export default {
     let match_btn_info = ref("开始匹配");
     let bots = ref("");
     let select_bot = ref("-1");
+    let match_time = ref(0);
+    let interval_id = null; // 用来存储setInterval的返回值
+
+    const start_match_time = () => {
+      interval_id = setInterval(() => {
+      match_time.value += 1;
+      }, 1000);
+    };
 
     const click_match_btn = () => {
       if (match_btn_info.value === "开始匹配") {
@@ -70,6 +83,7 @@ export default {
             bot_id: select_bot.value,
           })
         );
+        start_match_time();
       } else {
         match_btn_info.value = "开始匹配";
         // 取消匹配的话发送请求
@@ -78,6 +92,8 @@ export default {
             event: "stop-matching",
           })
         );
+        clearInterval(interval_id);
+        match_time.value = 0; // 重置match_time
       }
     };
 
@@ -102,6 +118,7 @@ export default {
       click_match_btn,
       bots,
       select_bot,
+      match_time,
     };
   },
 };
@@ -140,5 +157,12 @@ div.user-select-bot {
 div.user-select-bot {
   width: 60%;
   margin: auto;
+}
+
+.match-time {
+  text-align: center;
+  font-size: 80px;
+  font-weight: 600;
+  color: white;
 }
 </style>

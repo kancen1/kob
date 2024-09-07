@@ -54,4 +54,4 @@ const step = (timestamp) => {
     requestAnimationFrame(step)
 }
 // 刷新函数
-requestAnimationFrame(step)
+requestAnimationFrame(step) 

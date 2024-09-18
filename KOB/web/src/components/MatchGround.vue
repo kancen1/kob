@@ -33,8 +33,8 @@
         </div>
       </div>
     </div>
-
-    <div class="col-12 match-time" v-if="match_time !== 0">
+    
+    <div class="col-12 match-time" v-if="match_time !== 0" >
       {{ match_time }}
     </div>
 
@@ -160,9 +160,18 @@ div.user-select-bot {
 }
 
 .match-time {
-  text-align: center;
-  font-size: 80px;
-  font-weight: 600;
   color: white;
+  font-size: 40px;
+  text-align: center;
+  padding-top: 10vh;
+  font-weight: 600;
+  font-family: "Microsoft YaHei";
+  color: #fff;
+  text-shadow: 0 0 10px #fff;
+  -webkit-text-stroke: 1px #000;
+  -webkit-text-fill-color: transparent;
+  position: absolute;
+  top: 37vh;
+  left: 0vw;
 }
 </style>

@@ -84,7 +84,7 @@ export default {
                 }
             },
             error(resp) {
-                data.errpr(resp);
+                data.error(resp);
             }
             });
         },

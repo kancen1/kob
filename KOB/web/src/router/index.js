@@ -1,6 +1,7 @@
 import store from '@/store'
 import NotFound from '@/views/error/NotFound.vue'
 import GameInfoIndexView from '@/views/gameinfo/GameInfoIndexView.vue'
+import KobGameView from '@/views/kob/KobGameView.vue'
 import PkIndexView from '@/views/pk/PkIndexView.vue'
 import RanklistIndexView from '@/views/ranklist/RanklistIndexView.vue'
 import RecordContentView from '@/views/record/RecordContentView.vue'
@@ -76,6 +77,14 @@ const routes = [
     component: UserAccountRegisterView,
     meta: {
       requestAuth: false,
+    }
+  },
+  {
+    path: '/kob/game/',
+    name: 'kob_game',
+    component: KobGameView,
+    meta: {
+      requestAuth: true,
     }
   },
   {

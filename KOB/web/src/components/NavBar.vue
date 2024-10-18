@@ -35,6 +35,15 @@
           <li class="nav-item">
             <router-link
               :class="
+                route_name == 'kob_game' ? 'nav-link active' : 'nav-link'
+              "
+              :to="{ name: 'kob_game' }"
+              >拳皇小游戏</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link
+              :class="
                 route_name == 'game_info_index' ? 'nav-link active' : 'nav-link'
               "
               :to="{ name: 'game_info_index' }"

@@ -143,7 +143,7 @@ export default {
     const pull_page = (page) => {
       current_page = page;
       $.ajax({
-        url: "https://kancen.fun/api/record/getlist/",
+        url: "http://localhost:3000/api/record/getlist/",
         data: {
           page,
         },

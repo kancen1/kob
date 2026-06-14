@@ -21,6 +21,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.concurrent.ConcurrentHashMap;
 
 // 标记类可以被 Spring 容器管理为 Bean
@@ -128,6 +129,13 @@ public class WebSocketServer {
         }
 
         Bot botA = botMapper.selectById(aBotId), botB = botMapper.selectById(bBotId);
+
+        // 如果AI玩家没有对应的Bot，则使用默认Bot代码
+        if (botB == null && bId < -1) {
+            botB = new Bot(-2, bId, "默认AI", "内置默认AI", getDefaultBotCode(), new Date(), new Date());
+        } else if (botA == null && aId < -1) {
+            botA = new Bot(-1, aId, "默认AI", "内置默认AI", getDefaultBotCode(), new Date(), new Date());
+        }
 
         Game game = new Game(
                 13,
@@ -278,5 +286,11 @@ public class WebSocketServer {
             }
 
         }
+    }
+
+    // 内置默认AI: 使用 DeepSeek 大模型控制
+    private static String getDefaultBotCode() {
+        return "DEEPSEEK\n" +
+                "sk-4811f38148d14211ada38e695bb801c7\n";
     }
 }

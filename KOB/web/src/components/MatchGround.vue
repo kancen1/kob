@@ -99,7 +99,7 @@ export default {
 
     const refresh_bots = () => {
       $.ajax({
-        url: "https://kancen.fun/api/user/bot/getlist/",
+        url: "http://localhost:3000/api/user/bot/getlist/",
         type: "get",
         headers: {
           Authorization: "Bearer " + store.state.user.token,

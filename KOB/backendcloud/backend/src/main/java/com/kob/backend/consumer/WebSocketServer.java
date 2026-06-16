@@ -291,6 +291,6 @@ public class WebSocketServer {
     // 内置默认AI: 使用 DeepSeek 大模型控制
     private static String getDefaultBotCode() {
         return "DEEPSEEK\n" +
-                "sk-4811f38148d14211ada38e695bb801c7\n";
+                "sk-628c8dc9267a4236ac9abb080de6bedc\n";
     }
 }

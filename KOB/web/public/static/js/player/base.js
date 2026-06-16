@@ -50,6 +50,9 @@ export class Player extends AcGameObject {
         // 定义血量
         this.hp = 100;
 
+        // 死亡动画是否播放完毕
+        this.death_anim_done = false;
+
         // 查找出血条
         this.$hp = this.root.$kof.find(`.kof-head-hp-${this.id}>div`)
         this.$hp_div = this.$hp.find('div')
@@ -62,6 +65,12 @@ export class Player extends AcGameObject {
 
     // 定义操控
     update_control() {
+        // 游戏结束则禁止操作
+        if (this.root.game_map.game_over) return;
+
+        // 如果已经死亡，禁止操作
+        if (this.status === 6) return;
+
         // 定义是否使用过上左右空格
         let w, a, d, space;
         if (this.id === 0) {
@@ -120,16 +129,8 @@ export class Player extends AcGameObject {
     }
 
     update_move() {
-        // // 第一版 只给空中和击退加重力
-        // // 竖直速度 如果在空中才有加速度
-        // if (this.status === 3) {
-        //     this.vy += this.gravity;
-        // }
-        
-        // // 击退后增加向下速度
-        // if (this.status === 5) {
-        //     this.vy += this.gravity;
-        // }
+        // 游戏结束不再移动
+        if (this.root.game_map.game_over) return;
 
         // 第二版 给所有状态加重力
         this.vy += this.gravity;
@@ -352,6 +353,8 @@ export class Player extends AcGameObject {
                 if (status === 6) {
                     // 和++抵消一直在这一帧
                     this.frame_current_cnt--;
+                    // 标记死亡动画播放完毕
+                    this.death_anim_done = true;
                 } else {
                     // 没被打倒则静止
                     this.status = 0;
